@@ -4,7 +4,7 @@
 
 - **后端**：Cloudflare Workers（`src/index.js`，单个文件，无依赖）
 - **存储**：Cloudflare R2 存储桶（这里用的桶名是 `webdav`）
-- **访问地址**：自定义域名（如 `https://example.com`），也可以用 Worker 自带的 `*.workers.dev` 地址
+- **访问地址**：自定义域名（如 `https://w166.cc.cd`），也可以用 Worker 自带的 `*.workers.dev` 地址
 
 ## 功能
 
@@ -39,6 +39,8 @@
 
 只有文本格式可以编辑，例如：`txt / md / json / js / ts / tsx / jsx / css / html / xml / csv / log / yaml / ini / sh / bat / ps1 / psm1 / cmd / py / java / sql` 等。
 
+编码方面：打开时自动识别 UTF-8 / GBK（中文 Windows 批处理 `.bat` / `.cmd` 常为 GBK），保存时按原编码写回，编辑框里也可以手动切换编码。
+
 图片、视频、执行文件、压缩包等点 ✏️ 会弹出提示：**此文件不可编辑！**
 
 ![编辑 .tsx 文件](screenshots/edit-text.png)
@@ -58,7 +60,7 @@
 
 1. 注册 / 登录 [Cloudflare](https://dash.cloudflare.com)（需要一个 Cloudflare 账号）
 2. 在 R2 里建一个存储桶，例如命名为 `webdav`（R2 → Create bucket）
-3. 准备一个域名（可选）：把域名托管到 Cloudflare 后，可以给 Worker 绑自定义域名，例如 `example.com`
+3. 准备一个域名（可选）：把域名托管到 Cloudflare 后，可以给 Worker 绑自定义域名，例如 `w166.cc.cd`
 
 ### 方式一：Cloudflare 控制台部署（推荐，不用装工具）
 
@@ -68,7 +70,7 @@
    - `WEBDAV_USER`：登录用户名，例如 `admin`
    - `WEBDAV_PASS`：登录密码
 4. 回到 Worker 首页，点 **编辑代码**，把 [`src/index.js`](src/index.js) 的全部内容粘贴进去，替换原有代码，点 **部署**
-5. （可选）**设置** → **域和路由** → **添加自定义域**，填你的域名，例如 `example.com`
+5. （可选）**设置** → **域和路由** → **添加自定义域**，填你的域名，例如 `w166.cc.cd`
 
 部署完成后，浏览器打开你的域名，输入账号密码登录，就能看到文件列表。
 
@@ -109,19 +111,19 @@ bucket_name = "webdav"
 
 ```bash
 # 未登录应返回 401，要求 Basic 认证
-curl -i https://example.com/
+curl -i https://w166.cc.cd/
 
 # 登录后列目录应返回 207
-curl -u admin:你的密码 -X PROPFIND https://example.com/
+curl -u admin:你的密码 -X PROPFIND https://w166.cc.cd/
 
 # 上传一个测试文件，应返回 201
-curl -u admin:你的密码 -T test.txt https://example.com/test.txt
+curl -u admin:你的密码 -T test.txt https://w166.cc.cd/test.txt
 
 # 不带密码下载这个文件，应返回 200（下载链接是公开的）
-curl -i https://example.com/test.txt
+curl -i https://w166.cc.cd/test.txt
 
 # 删除测试文件，应返回 204；删完再下载应返回 404
-curl -u admin:你的密码 -X DELETE https://example.com/test.txt
+curl -u admin:你的密码 -X DELETE https://w166.cc.cd/test.txt
 ```
 
 ## 接入客户端举例
