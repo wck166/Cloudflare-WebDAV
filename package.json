@@ -1,0 +1,1 @@
+{"devDependencies":{"wrangler":"^4.0.0"},"name":"webdav-r2","private":true,"scripts":{"deploy":"wrangler deploy","dev":"wrangler dev"},"version":"1.0.0"}

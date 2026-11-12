@@ -1,0 +1,7 @@
+name = "webdav"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[[r2_buckets]]
+binding = "WEBDAV_BUCKET"
+bucket_name = "webdav"
