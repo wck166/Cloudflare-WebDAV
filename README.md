@@ -1,4 +1,4 @@
-# webDAV — Cloudflare Workers + R2 的 WebDAV 文件服务
+# Cloudflare-WebDAV — Cloudflare Workers + R2 的 WebDAV 文件服务
 
 用一个 Cloudflare Worker + R2 存储桶，搭一个自己的 WebDAV 网盘：手机、电脑都能用，浏览器里直接管理文件，也能挂到系统文件管理器里当网络硬盘。
 
